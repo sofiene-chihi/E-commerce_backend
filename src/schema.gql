@@ -32,6 +32,8 @@ type Mutation {
   createCommand(createCommandInput: CreateCommandInput!): Command!
   updateCommand(updateCommandInput: UpdateCommandInput!): Command!
   deleteCommand(id: Int!): Command!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(id: Float!): Product!
 }
 
 input CreateProductInput {
@@ -56,4 +58,12 @@ input UpdateCommandInput {
   purshase_cost: Float
   status: Int
   id: Float!
+input UpdateProductInput {
+  id: Int!
+  name: String!
+  category: String!
+  img: String
+  price: Float!
+  mark: String!
+  description: String
 }
