@@ -12,24 +12,32 @@ type Product {
   description: String
 }
 
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  phone_number: Int!
+  password: String!
+}
+
 type Query {
-  products: [Product!]!
+  products: [User!]!
   getProduct(id: Int!): Product!
 }
 
 type Mutation {
-  createProduct(createProductInput: CreateProductInput!): Product!
+  createProduct(registerUserInput: RegisterUserInput!): User!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   deleteProduct(id: Float!): Product!
+  login: User!
+  register(registerUserInput: RegisterUserInput!): User!
 }
 
-input CreateProductInput {
+input RegisterUserInput {
   name: String!
-  category: String!
-  img: String
-  price: Float!
-  mark: String!
-  description: String
+  email: String!
+  phone_number: Int!
+  password: String!
 }
 
 input UpdateProductInput {
