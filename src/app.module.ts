@@ -8,9 +8,11 @@ import { ProductsModule } from './products/products.module';
 import { CommandsModule } from './commands/commands.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     GraphQLModule.forRoot({
       debug: false,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql')
@@ -19,8 +21,8 @@ import { UsersModule } from './users/users.module';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'postgres',
-      password: 'sofiene',
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
       database: 'E-shop',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
