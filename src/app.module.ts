@@ -11,18 +11,18 @@ import { CommandsModule } from './commands/commands.module';
   imports: [
     GraphQLModule.forRoot({
       debug: false,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql')
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'sofiene',
+      password: 'sym@0507',
       database: 'E-shop',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
-      }),
+    }),
     ProductsModule,
     CommandsModule,
   ],
