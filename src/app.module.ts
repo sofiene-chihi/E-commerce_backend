@@ -18,7 +18,7 @@ import { CommandsModule } from './commands/commands.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'sym@0507',
+      password: 'sofiene',
       database: 'E-shop',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,

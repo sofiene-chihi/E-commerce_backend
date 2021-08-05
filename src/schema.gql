@@ -23,20 +23,42 @@ type Product {
 type Query {
   products: [Product!]!
   getProduct(id: Int!): Product!
+  filterProducts(productFilter: ProductFilter!): [Product!]!
   commands: [Command!]!
   getCommand(id: Int!): Command!
 }
 
+input ProductFilter {
+  category: String
+  priceRange: PriceRange
+  mark: String
+}
+
+input PriceRange {
+  priceMin: Float!
+  priceMax: Float!
+}
+
 type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(id: Float!): Product!
   createCommand(createCommandInput: CreateCommandInput!): Command!
   updateCommand(updateCommandInput: UpdateCommandInput!): Command!
   deleteCommand(id: Int!): Command!
-  updateProduct(updateProductInput: UpdateProductInput!): Product!
-  deleteProduct(id: Float!): Product!
 }
 
 input CreateProductInput {
+  name: String!
+  category: String!
+  img: String
+  price: Float!
+  mark: String!
+  description: String
+}
+
+input UpdateProductInput {
+  id: Int!
   name: String!
   category: String!
   img: String
@@ -58,12 +80,4 @@ input UpdateCommandInput {
   purshase_cost: Float
   status: Int
   id: Float!
-input UpdateProductInput {
-  id: Int!
-  name: String!
-  category: String!
-  img: String
-  price: Float!
-  mark: String!
-  description: String
 }
