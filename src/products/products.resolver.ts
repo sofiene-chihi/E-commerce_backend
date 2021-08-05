@@ -4,34 +4,35 @@ import { UpdateProductInput } from './dto/update-product-input';
 import { Product } from './product.entity';
 import { ProductsService } from './products.service';
 
-@Resolver(of => Product)
+@Resolver(() => Product)
 export class ProductsResolver {
+  constructor(private productsService: ProductsService) {}
 
-    constructor(private productsService: ProductsService){}
+  @Query(() => [Product])
+  products(): Promise<Product[]> {
+    return this.productsService.findAll();
+  }
 
-    @Query(returns => [Product])
-        products(): Promise<Product[]> {
-            return this.productsService.findAll();
-        }
+  @Mutation(() => Product)
+  createProduct(
+    @Args('createProductInput') createProductInput: CreateProductInput,
+  ): Promise<Product> {
+    return this.productsService.createProduct(createProductInput);
+  }
 
-    @Mutation(returns => Product)
-    createProduct(@Args('createProductInput') createProductInput: CreateProductInput): Promise<Product> {
-        return this.productsService.createProduct(createProductInput);
-    }
+  @Query(() => Product)
+  getProduct(@Args('id', { type: () => Int }) id: number): Promise<Product> {
+    return this.productsService.findOne(id);
+  }
+  @Mutation(() => Product)
+  updateProduct(
+    @Args('updateProductInput') updateProductInput: UpdateProductInput,
+  ): Promise<Product> {
+    return this.productsService.updateProduct(updateProductInput);
+  }
 
-    @Query(returns => Product)
-    getProduct(@Args('id', {type: () => Int}) id: number): Promise<Product> {
-        return this.productsService.findOne(id);
-    }
-
-    @Mutation(returns => Product)
-    updateProduct(@Args('updateProductInput') updateProductInput: UpdateProductInput): Promise<Product> {
-        return this.productsService.updateProduct(updateProductInput);
-    }
-
-    @Mutation(returns => Product)
-    deleteProduct(@Args('id') id: number): Promise<Product> {
-        return this.productsService.deleteProduct(id);
-    }
-
+  @Mutation(() => Product)
+  deleteProduct(@Args('id') id: number): Promise<Product> {
+    return this.productsService.deleteProduct(id);
+  }
 }

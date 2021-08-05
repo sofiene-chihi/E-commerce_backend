@@ -15,7 +15,7 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot(),
     GraphQLModule.forRoot({
       debug: false,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql')
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -23,10 +23,11 @@ import { ConfigModule } from '@nestjs/config';
       port: 5432,
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
+
       database: 'E-shop',
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
-      }),
+    }),
     ProductsModule,
     CommandsModule,
     AuthModule,
