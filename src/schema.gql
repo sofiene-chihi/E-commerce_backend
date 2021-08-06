@@ -20,9 +20,23 @@ type Product {
   description: String
 }
 
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  phone_number: Int!
+  password: String!
+}
+
+type LoginReturn {
+  user: User!
+  Bearer_Token: String!
+}
+
 type Query {
   products: [Product!]!
   getProduct(id: Int!): Product!
+  users: [User!]!
   commands: [Command!]!
   getCommand(id: Int!): Command!
 }
@@ -34,6 +48,9 @@ type Mutation {
   deleteCommand(id: Int!): Command!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   deleteProduct(id: Float!): Product!
+  register(registerUserInput: RegisterUserInput!): User!
+  login(loginInput: LoginInput!): LoginReturn!
+  registerUser(registerUserInput: RegisterUserInput!): User!
 }
 
 input CreateProductInput {
@@ -66,4 +83,16 @@ input UpdateProductInput {
   price: Float!
   mark: String!
   description: String
+}
+
+input RegisterUserInput {
+  name: String!
+  email: String!
+  phone_number: Int!
+  password: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
 }
