@@ -1,10 +1,13 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
-import { Command } from 'src/commands/command.entity';
+import { Command } from '../commands/command.entity';
+import { Comment } from '../comments/comment.entity';
+
 import {
   Column,
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -38,6 +41,9 @@ export class Product {
   @Column('text', { nullable: true })
   @Field({ nullable: true })
   description?: string;
+
+  @OneToMany(() => Comment, (comment) => comment.product)
+  comments?: Comment[];
 
   @ManyToMany(() => Command, (command) => command.products)
   commands: Command[];

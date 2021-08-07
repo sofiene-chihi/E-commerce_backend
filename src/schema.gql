@@ -10,6 +10,13 @@ type Command {
   purshase_cost: Float!
 }
 
+type Comment {
+  id: Int!
+  sentence: String!
+  productId: Int!
+  product: Product
+}
+
 type Product {
   id: Int!
   name: String!
@@ -36,24 +43,39 @@ type LoginReturn {
 type Query {
   products: [Product!]!
   getProduct(id: Int!): Product!
-  users: [User!]!
   commands: [Command!]!
   getCommand(id: Int!): Command!
+  users: [User!]!
+  comments: [Comment!]!
+  comment(id: Int!): Comment!
 }
 
 type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(id: Float!): Product!
   createCommand(createCommandInput: CreateCommandInput!): Command!
   updateCommand(updateCommandInput: UpdateCommandInput!): Command!
   deleteCommand(id: Int!): Command!
-  updateProduct(updateProductInput: UpdateProductInput!): Product!
-  deleteProduct(id: Float!): Product!
   register(registerUserInput: RegisterUserInput!): User!
   login(loginInput: LoginInput!): LoginReturn!
   registerUser(registerUserInput: RegisterUserInput!): User!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  removeComment(id: Int!): Comment!
 }
 
 input CreateProductInput {
+  name: String!
+  category: String!
+  img: String
+  price: Float!
+  mark: String!
+  description: String
+}
+
+input UpdateProductInput {
+  id: Int!
   name: String!
   category: String!
   img: String
@@ -75,14 +97,6 @@ input UpdateCommandInput {
   purshase_cost: Float
   status: Int
   id: Float!
-input UpdateProductInput {
-  id: Int!
-  name: String!
-  category: String!
-  img: String
-  price: Float!
-  mark: String!
-  description: String
 }
 
 input RegisterUserInput {
@@ -95,4 +109,15 @@ input RegisterUserInput {
 input LoginInput {
   email: String!
   password: String!
+}
+
+input CreateCommentInput {
+  sentence: String!
+  productId: Int!
+}
+
+input UpdateCommentInput {
+  sentence: String!
+  productId: Int
+  id: Int!
 }
