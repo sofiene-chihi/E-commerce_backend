@@ -43,11 +43,23 @@ type LoginReturn {
 type Query {
   products: [Product!]!
   getProduct(id: Int!): Product!
+  filterProducts(productFilter: ProductFilter!): [Product!]!
   commands: [Command!]!
   getCommand(id: Int!): Command!
   users: [User!]!
   comments: [Comment!]!
   comment(id: Int!): Comment!
+}
+
+input ProductFilter {
+  category: String
+  priceRange: PriceRange
+  mark: String
+}
+
+input PriceRange {
+  priceMin: Float!
+  priceMax: Float!
 }
 
 type Mutation {
