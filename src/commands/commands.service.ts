@@ -1,9 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Product } from 'src/products/product.entity';
+import Money from 'src/utilities/handleMoney';
 import { Repository } from 'typeorm';
 import { Command } from './command.entity';
 import { CreateCommandInput } from './dto/create-command-input';
 import { UpdateCommandInput } from './dto/update-command-input';
+import { BASE_CURRENCY, OUTPUT_PRECISION } from '../utilities/handleMoney';
 
 @Injectable()
 export class CommandsService {
@@ -41,5 +44,20 @@ export class CommandsService {
       }
     }
     throw new NotFoundException(`Record not found for  id ${id}`);
+  }
+
+  calculatePurchaseCost(products: Product[]) {
+    if (products && products.length > 0)
+      return products.reduce((acc, product) => {
+        return new Money(String(acc), BASE_CURRENCY)
+          .add(String(product.price))
+          .toFixed(OUTPUT_PRECISION);
+      }, '0');
+  }
+
+  determinShippingCost(purchaseCost: number, minimumForFree) {
+    return purchaseCost > minimumForFree
+      ? new Money('7', BASE_CURRENCY).toFixed(OUTPUT_PRECISION)
+      : new Money('0', BASE_CURRENCY).toFixed(OUTPUT_PRECISION);
   }
 }
