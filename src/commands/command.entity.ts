@@ -15,7 +15,7 @@ export class Command {
   @Field(() => Int)
   id: number;
 
-  @Column()
+  @Column({default : ""})
   @Field()
   payment_mode: string;
 

@@ -35,6 +35,14 @@ type User {
   password: String!
 }
 
+type Address {
+  id: Int!
+  state: String!
+  delegation: String!
+  height: Float!
+  width: Float!
+}
+
 type LoginReturn {
   user: User!
   Bearer_Token: String!
@@ -49,6 +57,8 @@ type Query {
   users: [User!]!
   comments: [Comment!]!
   comment(id: Int!): Comment!
+  addresses: [Address!]!
+  getAddress(id: Int!): Address!
 }
 
 input ProductFilter {
@@ -71,10 +81,12 @@ type Mutation {
   deleteCommand(id: Int!): Command!
   register(registerUserInput: RegisterUserInput!): User!
   login(loginInput: LoginInput!): LoginReturn!
-  registerUser(registerUserInput: RegisterUserInput!): User!
   createComment(createCommentInput: CreateCommentInput!): Comment!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   removeComment(id: Int!): Comment!
+  createAddress(createAddressInput: CreateAddressInput!): Address!
+  updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+  deleteAddress(id: Int!): Address!
 }
 
 input CreateProductInput {
@@ -132,4 +144,19 @@ input UpdateCommentInput {
   sentence: String!
   productId: Int
   id: Int!
+}
+
+input CreateAddressInput {
+  state: String
+  delegation: String
+  height: Float
+  width: Float
+}
+
+input UpdateAddressInput {
+  id: Int!
+  state: String!
+  delegation: String!
+  height: Float!
+  width: Float!
 }
