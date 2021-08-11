@@ -33,6 +33,7 @@ type User {
   email: String!
   phone_number: Int!
   password: String!
+  address: Address!
 }
 
 type Address {
@@ -41,6 +42,7 @@ type Address {
   delegation: String!
   height: Float!
   width: Float!
+  user: User
 }
 
 type LoginReturn {
@@ -128,6 +130,14 @@ input RegisterUserInput {
   email: String!
   phone_number: Int!
   password: String!
+  address: CreateAddressInput
+}
+
+input CreateAddressInput {
+  state: String
+  delegation: String
+  height: Float
+  width: Float
 }
 
 input LoginInput {
@@ -144,13 +154,6 @@ input UpdateCommentInput {
   sentence: String!
   productId: Int
   id: Int!
-}
-
-input CreateAddressInput {
-  state: String
-  delegation: String
-  height: Float
-  width: Float
 }
 
 input UpdateAddressInput {

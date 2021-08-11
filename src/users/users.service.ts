@@ -14,7 +14,8 @@ export class UsersService {
 
     async registerUser(registerUserInput : RegisterUserInput): Promise<User> {
 
-        // registerUserInput.address = this.addressRepository.create(registerUserInput.address);
+        registerUserInput.address = this.addressRepository.create(registerUserInput.address);
+        
         const newUser = this.userRepository.create(registerUserInput);
         console.log(newUser)
         return await this.userRepository.save(newUser);

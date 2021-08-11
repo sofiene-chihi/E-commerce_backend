@@ -22,8 +22,8 @@ export class RegisterUserInput{
     @Field()
     password: string;
 
-    // @Field(()=> CreateAddressInput,{nullable:true})
-    // address: Address
+    @Field(()=> CreateAddressInput,{nullable:true})
+    address: Address
 
 
 }

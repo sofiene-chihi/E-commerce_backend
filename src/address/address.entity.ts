@@ -31,7 +31,7 @@ export class Address {
   @Field(() => Float)
   width: number;
 
-  // @OneToOne(() => User, user => user.address) // specify inverse side as a second parameter
-  // @Field(() => User, {nullable:true})
-  // user: User;
+  @OneToOne(() => User, user => user.address) // specify inverse side as a second parameter
+  @Field(() => User, {nullable:true})
+  user: User;
 }

@@ -28,11 +28,11 @@ export class User{
     password: string;
 
 
-    // @OneToOne(() => Address, address => address.user, {
-    //     cascade: true
-    // })
-    // @JoinColumn()
-    // @Field(() => Address)
-    // address: Address;   
+    @OneToOne(() => Address, address => address.user, {
+        cascade: true
+    })
+    @JoinColumn()
+    @Field(() => Address)
+    address: Address;   
 
 }
