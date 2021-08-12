@@ -16,5 +16,10 @@ export class UsersResolver {
     users(): Promise<User[]> {
             return this.usersService.findAll();
         }
+
+    @Mutation(returns => User)
+    registerUser(@Args('registerUserInput') registerUserInput: RegisterUserInput): Promise<User> {
+        return this.usersService.registerUser(registerUserInput);
+    }
 }
 

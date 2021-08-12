@@ -1,24 +1,21 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 import { Product } from 'src/products/product.entity';
-import { Quantity } from 'src/quantity/quantity.entity';
 import {
   Column,
   Entity,
   JoinTable,
   ManyToMany,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity('command')
 @ObjectType()
 export class Command {
-
   @PrimaryGeneratedColumn()
   @Field(() => Int)
   id: number;
 
-  @Column({default : ""})
+  @Column()
   @Field()
   payment_mode: string;
 
@@ -34,8 +31,7 @@ export class Command {
   @Field(() => Float)
   purshase_cost: number;
 
-
-  @OneToMany(type => Quantity, quantity => quantity.command)
-  quantities: Quantity[];
-
+  @ManyToMany(() => Product, (product) => product.commands)
+  @JoinTable({ name: 'Command_Product' })
+  products: Product[];
 }
