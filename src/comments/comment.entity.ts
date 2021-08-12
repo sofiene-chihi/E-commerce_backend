@@ -1,10 +1,8 @@
-import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Product } from '../products/product.entity';
 import {
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';

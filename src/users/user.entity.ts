@@ -1,6 +1,6 @@
-import { Field, Float, Int, ObjectType } from "@nestjs/graphql";
-import { type } from "os";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Field, InputType, Int, ObjectType } from "@nestjs/graphql";
+import { Address } from "src/address/address.entity";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -26,5 +26,14 @@ export class User{
     @Column()
     @Field()
     password: string;
+
+
+    @OneToOne(() => Address, address => address.user, {
+        cascade: true,
+        eager: true
+    })
+    @JoinColumn()
+    @Field(() => Address)
+    address: Address;   
 
 }

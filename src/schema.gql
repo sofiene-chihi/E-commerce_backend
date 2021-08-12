@@ -2,6 +2,31 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Comment {
+  id: Int!
+  sentence: String!
+  productId: Int!
+  product: Product
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  phone_number: Int!
+  password: String!
+  address: Address!
+}
+
+type Address {
+  id: Int!
+  state: String!
+  delegation: String!
+  height: Float!
+  width: Float!
+  user: User
+}
+
 type Command {
   id: Int!
   payment_mode: String!
@@ -10,11 +35,11 @@ type Command {
   purshase_cost: Float!
 }
 
-type Comment {
+type Quantity {
   id: Int!
-  sentence: String!
   productId: Int!
-  product: Product
+  commandId: Int!
+  value: Int!
 }
 
 type Product {
@@ -27,14 +52,6 @@ type Product {
   description: String
 }
 
-type User {
-  id: Int!
-  name: String!
-  email: String!
-  phone_number: Int!
-  password: String!
-}
-
 type LoginReturn {
   user: User!
   Bearer_Token: String!
@@ -42,13 +59,16 @@ type LoginReturn {
 
 type Query {
   products: [Product!]!
-  getProduct(id: Int!): Product!
+  getProduct(id: Int!): Quantity!
   filterProducts(productFilter: ProductFilter!): [Product!]!
   commands: [Command!]!
   getCommand(id: Int!): Command!
   users: [User!]!
   comments: [Comment!]!
   comment(id: Int!): Comment!
+  addresses: [Address!]!
+  getAddress(id: Int!): Address!
+  quantities: [Quantity!]!
 }
 
 input ProductFilter {
@@ -71,10 +91,15 @@ type Mutation {
   deleteCommand(id: Int!): Command!
   register(registerUserInput: RegisterUserInput!): User!
   login(loginInput: LoginInput!): LoginReturn!
-  registerUser(registerUserInput: RegisterUserInput!): User!
   createComment(createCommentInput: CreateCommentInput!): Comment!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   removeComment(id: Int!): Comment!
+  createAddress(createAddressInput: CreateAddressInput!): Address!
+  updateAddress(updateAddressInput: UpdateAddressInput!): Address!
+  deleteAddress(id: Int!): Address!
+  addQuantity(addQuantity: AddQuantityInput!): Quantity!
+  updateQuantity(updateQuantity: UpdateQuantityInput!): Quantity!
+  deleteQuantity(id: Int!): Quantity!
 }
 
 input CreateProductInput {
@@ -116,6 +141,14 @@ input RegisterUserInput {
   email: String!
   phone_number: Int!
   password: String!
+  address: CreateAddressInput
+}
+
+input CreateAddressInput {
+  state: String
+  delegation: String
+  height: Float
+  width: Float
 }
 
 input LoginInput {
@@ -132,4 +165,25 @@ input UpdateCommentInput {
   sentence: String!
   productId: Int
   id: Int!
+}
+
+input UpdateAddressInput {
+  id: Int!
+  state: String!
+  delegation: String!
+  height: Float!
+  width: Float!
+}
+
+input AddQuantityInput {
+  commandId: Int!
+  productId: Int!
+  value: Int!
+}
+
+input UpdateQuantityInput {
+  id: Int!
+  commandId: Int!
+  productId: Int!
+  value: Int!
 }
