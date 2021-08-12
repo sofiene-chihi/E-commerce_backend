@@ -9,10 +9,10 @@ export class ProductFilter {
     @Field({nullable: true})
     category: string;
   
-    @IsNumber()
     @Field(() => PriceRange, {nullable: true})
     priceRange: PriceRange;
   
+    @IsAlpha()
     @Field({nullable: true})
     mark: string;
 

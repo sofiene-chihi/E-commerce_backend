@@ -4,11 +4,9 @@ import { IsNumber } from 'class-validator';
 @InputType()
 export class AddQuantityInput {
 
-    @IsNumber()
     @Field(()=>Int)
     commandId: number;
 
-    @IsNumber()
     @Field(()=>Int)
     productId: number;
 

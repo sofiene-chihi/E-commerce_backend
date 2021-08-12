@@ -1,5 +1,5 @@
 import { Field, Float, InputType, Int, ObjectType } from '@nestjs/graphql';
-import { IsAlpha, IsNumber } from 'class-validator';
+import { IsAlpha, IsNumber, Max } from 'class-validator';
 
 @InputType()
 export class CreateAddressInput {
