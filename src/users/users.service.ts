@@ -3,21 +3,17 @@ import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RegisterUserInput } from './dto/register-user-input';
-import { Address } from 'src/address/address.entity';
 
 
 @Injectable()
 export class UsersService {
 
-    constructor(@InjectRepository(User) private userRepository : Repository<User>,@InjectRepository(Address) private addressRepository : Repository<Address>) {}
+    constructor(@InjectRepository(User) private userRepository : Repository<User>) {}
 
 
     async registerUser(registerUserInput : RegisterUserInput): Promise<User> {
 
-        registerUserInput.address = this.addressRepository.create(registerUserInput.address);
-        
         const newUser = this.userRepository.create(registerUserInput);
-        console.log(newUser)
         return await this.userRepository.save(newUser);
     }
 
@@ -29,7 +25,7 @@ export class UsersService {
         return await this.userRepository.findOne({email: email});
     }
 
-    async deleteUser(email: string): Promise<User> {
+    async deleteProduct(email: string): Promise<User> {
 
         let user  = this.findOne(email);
         if ( await this.userRepository.delete((await user).id)){

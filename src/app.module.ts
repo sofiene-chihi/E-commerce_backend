@@ -10,8 +10,6 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { CommentsModule } from './comments/comments.module';
-import { AddressModule } from './address/address.module';
-import { QuantityModule } from './quantity/quantity.module';
 
 @Module({
   imports: [
@@ -37,8 +35,6 @@ import { QuantityModule } from './quantity/quantity.module';
     AuthModule,
     UsersModule,
     CommentsModule,
-    AddressModule,
-    QuantityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
