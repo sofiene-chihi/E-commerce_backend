@@ -29,7 +29,8 @@ export class User{
 
 
     @OneToOne(() => Address, address => address.user, {
-        cascade: true
+        cascade: true,
+        eager: true
     })
     @JoinColumn()
     @Field(() => Address)

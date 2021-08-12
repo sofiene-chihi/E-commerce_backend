@@ -11,6 +11,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { CommentsModule } from './comments/comments.module';
 import { AddressModule } from './address/address.module';
+import { QuantityModule } from './quantity/quantity.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { AddressModule } from './address/address.module';
     UsersModule,
     CommentsModule,
     AddressModule,
+    QuantityModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,6 +10,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Quantity } from 'src/quantity/quantity.entity';
 
 @Entity('product')
 @ObjectType()
@@ -45,6 +46,6 @@ export class Product {
   @OneToMany(() => Comment, (comment) => comment.product)
   comments?: Comment[];
 
-  @ManyToMany(() => Command, (command) => command.products)
-  commands: Command[];
+  @OneToMany(type => Quantity, quantity => quantity.product)
+  quantities: Quantity[];
 }
