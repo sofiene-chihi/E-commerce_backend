@@ -1,6 +1,8 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Float, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Role } from '../auth/enums/roles.enum';
 import { CreateProductInput } from './dto/create-product-input';
 import { PriceRange } from './dto/price-range';
 import { ProductFilter } from './dto/product-filter';
@@ -13,6 +15,8 @@ export class ProductsResolver {
   constructor(private productsService: ProductsService) {}
 
   @Query(() => [Product])
+  @UseGuards(GqlAuthGuard)
+  @Roles(Role.Client)
   products(): Promise<Product[]> {
     return this.productsService.findAll();
   }
@@ -30,12 +34,13 @@ export class ProductsResolver {
     return this.productsService.findOne(id);
   }
 
-
   @Query(() => [Product])
-  filterProducts(@Args('productFilter', { type: () => ProductFilter }) productFilter: ProductFilter): Promise<Product[]> {
+  filterProducts(
+    @Args('productFilter', { type: () => ProductFilter })
+    productFilter: ProductFilter,
+  ): Promise<Product[]> {
     return this.productsService.filterProducts(productFilter);
   }
-
 
   // @Query(() => [Product])
   // getProductByCategory(@Args('category', { type: () => String }) category: string): Promise<Product[]> {
@@ -51,7 +56,6 @@ export class ProductsResolver {
   // getProductByName(@Args('name', { type: () => String }) name: string): Promise<Product[]> {
   //   return this.productsService.findByName(name);
   // }
-
 
   // @Query(() => [Product])
   // getProductByMark(@Args('mark', { type: () => String }) mark: string): Promise<Product[]> {

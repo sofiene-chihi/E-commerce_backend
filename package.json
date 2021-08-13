@@ -30,6 +30,7 @@
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/typeorm": "^8.0.1",
+    "apollo-cache-control": "^0.14.0",
     "apollo-server-express": "^2.25.2",
     "bcrypt": "^5.0.1",
     "class-validator": "^0.13.1",

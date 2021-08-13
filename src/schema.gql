@@ -33,6 +33,7 @@ type User {
   email: String!
   phone_number: Int!
   password: String!
+  roleId: Float!
 }
 
 type LoginReturn {
@@ -72,8 +73,8 @@ type Mutation {
   register(registerUserInput: RegisterUserInput!): User!
   login(loginInput: LoginInput!): LoginReturn!
   registerUser(registerUserInput: RegisterUserInput!): User!
-  createComment(createCommentInput: CreateCommentInput!): Comment!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
   removeComment(id: Int!): Comment!
 }
 
@@ -116,6 +117,7 @@ input RegisterUserInput {
   email: String!
   phone_number: Int!
   password: String!
+  roleId: Int!
 }
 
 input LoginInput {
@@ -123,13 +125,13 @@ input LoginInput {
   password: String!
 }
 
-input CreateCommentInput {
-  sentence: String!
-  productId: Int!
-}
-
 input UpdateCommentInput {
   sentence: String!
   productId: Int
   id: Int!
+}
+
+input CreateCommentInput {
+  sentence: String!
+  productId: Int!
 }

@@ -1,5 +1,6 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Role } from 'src/roles/roles.entity';
 
 @Entity('users')
 @ObjectType()
@@ -23,4 +24,11 @@ export class User {
   @Column()
   @Field()
   password: string;
+
+  @Column()
+  @Field()
+  roleId: number;
+
+  @ManyToOne(() => Role, (role) => role.users)
+  role: Role;
 }

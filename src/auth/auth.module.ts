@@ -6,6 +6,8 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { env } from 'process';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guards/roles.guards';
 require('dotenv').config();
 
 @Module({
@@ -17,6 +19,14 @@ require('dotenv').config();
       signOptions: { expiresIn: '3600s' },
     }),
   ],
-  providers: [AuthService, AuthResolver, JwtStrategy],
+  providers: [
+    AuthService,
+    AuthResolver,
+    JwtStrategy,
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AuthModule {}
