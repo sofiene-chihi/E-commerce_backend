@@ -1,6 +1,6 @@
 import { Field, InputType, Int, ObjectType } from "@nestjs/graphql";
 import { Address } from "src/address/address.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 
 @Entity()
@@ -26,6 +26,14 @@ export class User{
     @Column()
     @Field()
     password: string;
+
+   
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP()" })
+    public createdAt: Date;
+  
+  
+    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP()", onUpdate: "CURRENT_TIMESTAMP(6)" })
+    public updatedAt: Date;
 
 
     @OneToOne(() => Address, address => address.user, {

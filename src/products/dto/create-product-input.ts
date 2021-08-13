@@ -3,6 +3,7 @@ import { IsAlpha, IsAlphanumeric, IsNumber } from 'class-validator';
 
 @InputType()
 export class CreateProductInput {
+  
   @Field()
   name: string;
 
