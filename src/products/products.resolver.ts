@@ -1,7 +1,9 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Float, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Roles } from 'src/auth/decorators/roles.decorator';
+import { CurrentUser } from 'src/auth/decorators/user.decorator';
 import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
+import { User } from 'src/users/user.entity';
 import { Role } from '../auth/enums/roles.enum';
 import { CreateProductInput } from './dto/create-product-input';
 import { PriceRange } from './dto/price-range';
@@ -16,8 +18,9 @@ export class ProductsResolver {
 
   @Query(() => [Product])
   @UseGuards(GqlAuthGuard)
-  @Roles(Role.Client)
+  //@Roles(Role.Client)
   products(): Promise<Product[]> {
+   //console.log(user);
     return this.productsService.findAll();
   }
 

@@ -55,7 +55,6 @@ export class AuthService {
   async validateJwtPayload(payload: any): Promise<User> {
     // This will be used when the user has already logged in and has a JWT
     const user = await this.usersService.findOne(payload.sub);
-
     // Ensure the user exists
     if (user) {
       return user;

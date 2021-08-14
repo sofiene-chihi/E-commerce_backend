@@ -23,6 +23,10 @@ export class UsersService {
     return await this.userRepository.findOne({ email: email });
   }
 
+  async getUser(id: number): Promise<User> {
+    return await this.userRepository.findOne(id);
+  }
+
   async deleteProduct(email: string): Promise<User> {
     const user = this.findOne(email);
     if (await this.userRepository.delete((await user).id)) {
