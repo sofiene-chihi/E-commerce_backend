@@ -7,6 +7,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { commandStatus } from './enum/commandStatus.enum';
 
 @Entity('command')
 @ObjectType()
@@ -23,9 +24,9 @@ export class Command {
   @Field(() => Float)
   shipping_cost: number;
 
-  @Column({ default: 0 })
-  @Field(() => Int)
-  status: number;
+  @Column({ default: 'sumbitted' })
+  @Field()
+  status: string;
 
   @Column('float', { default: 0 })
   @Field(() => Float)

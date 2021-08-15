@@ -6,7 +6,7 @@ type Command {
   id: Int!
   payment_mode: String!
   shipping_cost: Float!
-  status: Int!
+  status: String!
   purshase_cost: Float!
 }
 
@@ -54,7 +54,7 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   deleteProduct(id: Float!): Product!
-  createCommand(createCommandInput: CreateCommandInput!): Command!
+  createCommand(commandData: CommandData!): Command!
   updateCommand(updateCommandInput: UpdateCommandInput!): Command!
   deleteCommand(id: Int!): Command!
   register(registerUserInput: RegisterUserInput!): User!
@@ -84,19 +84,23 @@ input UpdateProductInput {
   description: String
 }
 
-input CreateCommandInput {
+input CommandData {
   payment_mode: String!
-  shipping_cost: Float!
-  purshase_cost: Float!
-  status: Int!
+  selectedProducts: [SelectedProducts!]!
+}
+
+input SelectedProducts {
+  id: Int!
+  quantity: Int!
+  price: Float!
 }
 
 input UpdateCommandInput {
   payment_mode: String
   shipping_cost: Float
   purshase_cost: Float
-  status: Int
   id: Float!
+  status: String
 }
 
 input RegisterUserInput {

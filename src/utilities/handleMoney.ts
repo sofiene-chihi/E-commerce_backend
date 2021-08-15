@@ -1,6 +1,5 @@
 import { Money } from 'bigint-money';
-import Numeral from 'numeral';
-
+import * as Numeral from 'numeral';
 export const BASE_CURRENCY = 'DT';
 export const OUTPUT_PRECISION = 10;
 
