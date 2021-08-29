@@ -14,4 +14,8 @@ export class CreateCommandInput {
   @IsNumber()
   @Field(() => Float)
   purshase_cost: number;
+
+  @IsNumber()
+  @Field(() => Int)
+  status: number;
 }

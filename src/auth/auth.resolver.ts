@@ -8,17 +8,19 @@ import { AuthService } from './auth.service';
 import { LoginInput } from 'src/users/dto/login-input';
 import { LoginReturn } from './dto/login-return';
 
-@Resolver(() => User)
+@Resolver(()=>User)
 export class AuthResolver {
-  constructor(private authService: AuthService) {}
 
-  @Mutation(() => User)
-  register(@Args('registerUserInput') registerUserInput: RegisterUserInput) {
-    return this.authService.register(registerUserInput);
-  }
+    constructor(private authService: AuthService){}
 
-  @Mutation(() => LoginReturn)
-  login(@Args('loginInput') loginInput: LoginInput) {
-    return this.authService.login(loginInput);
-  }
+
+    @Mutation(() => User)
+    register(@Args('registerUserInput') registerUserInput: RegisterUserInput) {
+        return this.authService.register(registerUserInput);
+    }
+
+    @Mutation(() => LoginReturn)
+    login(@Args('loginInput') loginInput: LoginInput) {
+      return this.authService.login(loginInput);
+    } 
 }
