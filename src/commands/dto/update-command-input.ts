@@ -12,6 +12,6 @@ export class UpdateCommandInput extends PartialType(CreateCommandInput) {
   purshase_cost?: number;
 
   @IsNumber()
-  @Field(() => Int, { nullable: true })
-  status?: number;
+  @Field({ nullable: true })
+  status?: string;
 }
