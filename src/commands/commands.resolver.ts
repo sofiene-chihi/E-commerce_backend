@@ -1,7 +1,6 @@
 import { Resolver, Query, Mutation, Int, Args } from '@nestjs/graphql';
 import { Command } from './command.entity';
 import { CommandsService } from './commands.service';
-import { CommandData } from './dto/command-data';
 import { CreateCommandInput } from './dto/create-command-input';
 import { UpdateCommandInput } from './dto/update-command-input';
 
@@ -21,9 +20,9 @@ export class CommandsResolver {
 
   @Mutation(() => Command)
   createCommand(
-    @Args('commandData') commandData: CommandData,
+    @Args('createCommandInput') createCommandInput: CreateCommandInput,
   ): Promise<Command> {
-    return this.commandsService.generateOrder(commandData);
+    return this.commandsService.createCommande(createCommandInput);
   }
 
   @Mutation(() => Command)
