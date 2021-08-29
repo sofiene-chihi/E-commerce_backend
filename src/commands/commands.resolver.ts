@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Int, Args } from '@nestjs/graphql';
+import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Command } from './command.entity';
 import { CommandsService } from './commands.service';
 import { CommandData } from './dto/command-data';
@@ -10,16 +12,19 @@ export class CommandsResolver {
   constructor(private commandsService: CommandsService) {}
 
   @Query(() => [Command])
+  @UseGuards(GqlAuthGuard)
   commands(): Promise<Command[]> {
     return this.commandsService.findAll();
   }
 
   @Query(() => Command)
+  @UseGuards(GqlAuthGuard)
   getCommand(@Args('id', { type: () => Int }) id: number): Promise<Command> {
     return this.commandsService.findOne(id);
   }
 
   @Mutation(() => Command)
+  @UseGuards(GqlAuthGuard)
   createCommand(
     @Args('commandData') commandData: CommandData,
   ): Promise<Command> {
@@ -27,6 +32,7 @@ export class CommandsResolver {
   }
 
   @Mutation(() => Command)
+  @UseGuards(GqlAuthGuard)
   updateCommand(
     @Args('updateCommandInput') updateCommandInput: UpdateCommandInput,
   ): Promise<Command> {
@@ -34,6 +40,7 @@ export class CommandsResolver {
   }
 
   @Mutation(() => Command)
+  @UseGuards(GqlAuthGuard)
   deleteCommand(@Args('id', { type: () => Int }) id: number): Promise<Command> {
     return this.commandsService.deleteCommand(id);
   }

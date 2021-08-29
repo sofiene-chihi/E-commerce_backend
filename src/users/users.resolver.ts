@@ -21,4 +21,5 @@ export class UsersResolver {
   ): Promise<User> {
     return this.usersService.registerUser(registerUserInput);
   }
+
 }

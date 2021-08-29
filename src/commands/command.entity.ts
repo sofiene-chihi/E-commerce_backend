@@ -1,22 +1,26 @@
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
-import { Product } from 'src/products/product.entity';
+import { Quantity } from 'src/quantity/quantity.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { commandStatus } from './enum/commandStatus.enum';
 
 @Entity('command')
 @ObjectType()
 export class Command {
+
   @PrimaryGeneratedColumn()
   @Field(() => Int)
   id: number;
 
-  @Column()
+  @Column({default : ""})
   @Field()
   payment_mode: string;
 
@@ -32,7 +36,14 @@ export class Command {
   @Field(() => Float)
   purshase_cost: number;
 
-  @ManyToMany(() => Product, (product) => product.commands)
-  @JoinTable({ name: 'Command_Product' })
-  products: Product[];
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP()" })
+  public createdAt: Date;
+
+
+  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP()", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  public updatedAt: Date;
+
+  @OneToMany(type => Quantity, quantity => quantity.command)
+  quantities: Quantity[];
+
 }

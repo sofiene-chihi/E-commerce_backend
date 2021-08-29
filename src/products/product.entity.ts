@@ -4,12 +4,15 @@ import { Comment } from '../comments/comment.entity';
 
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
+import { Quantity } from 'src/quantity/quantity.entity';
 
 @Entity('product')
 @ObjectType()
@@ -42,9 +45,17 @@ export class Product {
   @Field({ nullable: true })
   description?: string;
 
+     
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP()" })
+  public createdAt: Date;
+
+
+  @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP()", onUpdate: "CURRENT_TIMESTAMP(6)" })
+  public updatedAt: Date;
+
   @OneToMany(() => Comment, (comment) => comment.product)
   comments?: Comment[];
 
-  @ManyToMany(() => Command, (command) => command.products)
-  commands: Command[];
+  @OneToMany(type => Quantity, quantity => quantity.product)
+  quantities: Quantity[];
 }
