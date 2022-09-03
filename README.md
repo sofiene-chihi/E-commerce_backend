@@ -1,6 +1,7 @@
 # E-commerce Backend
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" />
+   <img src="https://www.vectorlogo.zone/logos/graphql/graphql-icon.svg" alt="graphql" width="320" />
 </p>
 
 A BACKEND for an E-commerce project using Nest JS / GraphQL and Postgres database
